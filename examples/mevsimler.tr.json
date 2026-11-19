@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "lang": "tr",
+  "question": "Neden mevsimler var?",
+  "title": "Neden mevsimler var?",
+  "summary": "Mevsimleri Güneş'e uzaklık değil, Dünya'nın 23,4° eğik ekseni belirler.",
+  "steps": [
+    {
+      "title": "Yaygın yanılgı: uzaklık",
+      "narration": "Dünya Güneş'e en yakın konumuna (günberi, yaklaşık 147 milyon km) ocak başında gelir; en uzak konumuna (günöte, yaklaşık 152 milyon km) temmuz başında. Kuzey yarımkürede ocak kıştır; demek ki neden uzaklık olamaz.",
+      "elements": [
+        { "type": "text", "x": 60, "y": 270, "size": "sm", "color": "red", "text": "Yanılgı: “Yazın Güneş'e daha yakınız.”" },
+        { "type": "line", "x1": 168, "y1": 258, "x2": 548, "y2": 261, "color": "red" },
+        { "type": "text", "x": 60, "y": 315, "size": "sm", "text": "Oysa Güneş'e en yakın olduğumuz gün ocak başıdır: kuzeyde kış!" }
+      ]
+    },
+    {
+      "title": "Güneş ve yörünge",
+      "narration": "Çizimde yörüngeye eğik baktığımız için elips gibi görünüyor; gerçekte çembere çok yakındır. Yıl içindeki yaklaşık %3'lük uzaklık farkı mevsimleri açıklamaya yetmez.",
+      "elements": [
+        { "type": "circle", "cx": 1130, "cy": 540, "r": 55, "color": "amber", "fill": "amber" },
+        { "type": "line", "x1": 1130, "y1": 472, "x2": 1130, "y2": 452, "color": "amber" },
+        { "type": "line", "x1": 1178, "y1": 492, "x2": 1192, "y2": 478, "color": "amber" },
+        { "type": "line", "x1": 1178, "y1": 588, "x2": 1192, "y2": 602, "color": "amber" },
+        { "type": "line", "x1": 1130, "y1": 608, "x2": 1130, "y2": 628, "color": "amber" },
+        { "type": "line", "x1": 1082, "y1": 588, "x2": 1068, "y2": 602, "color": "amber" },
+        { "type": "line", "x1": 1082, "y1": 492, "x2": 1068, "y2": 478, "color": "amber" },
+        { "type": "text", "x": 1130, "y": 668, "size": "sm", "anchor": "middle", "color": "amber", "text": "Güneş" },
+        { "type": "ellipse", "cx": 1130, "cy": 540, "rx": 370, "ry": 240, "dashed": true },
+        { "type": "text", "x": 1130, "y": 832, "size": "sm", "anchor": "middle", "text": "yörünge (eğik bakış: aslında neredeyse çember)" },
+        { "type": "text", "x": 60, "y": 425, "size": "sm", "text": "Yörünge neredeyse çemberdir: uzaklık yıl boyunca yalnızca %3 kadar değişir." }
+      ]
+    },
+    {
+      "title": "Eğik eksen: 23,4°",
+      "narration": "Dünya'nın dönme ekseni, yörünge düzlemine dik olan doğrultuyla 23,4 derecelik açı yapar. Eksen yıl boyunca uzayda aynı yöne (yaklaşık olarak Kutup Yıldızı'na) bakar; Dünya Güneş'in çevresinde dolanırken yön değiştirmez.",
+      "elements": [
+        { "type": "circle", "cx": 760, "cy": 540, "r": 42, "color": "blue", "fill": "blue" },
+        { "type": "line", "x1": 760, "y1": 540, "x2": 760, "y2": 400, "dashed": true },
+        { "type": "line", "x1": 708, "y1": 659, "x2": 812, "y2": 421, "color": "red" },
+        { "type": "line", "x1": 721, "y1": 523, "x2": 799, "y2": 557, "color": "blue" },
+        { "type": "arc", "cx": 760, "cy": 540, "r": 108, "from": 90, "to": 66.6, "color": "red" },
+        { "type": "text", "x": 748, "y": 428, "size": "sm", "anchor": "end", "color": "red", "text": "23,4°" },
+        { "type": "text", "x": 824, "y": 418, "size": "sm", "color": "red", "text": "K" },
+        { "type": "circle", "cx": 1500, "cy": 540, "r": 42, "color": "blue", "fill": "blue" },
+        { "type": "line", "x1": 1448, "y1": 659, "x2": 1552, "y2": 421, "color": "red" },
+        { "type": "line", "x1": 1461, "y1": 523, "x2": 1539, "y2": 557, "color": "blue" },
+        { "type": "text", "x": 1562, "y": 418, "size": "sm", "color": "red", "text": "K" },
+        { "type": "text", "x": 60, "y": 530, "size": "sm", "color": "blue", "text": "Asıl neden: Dünya'nın ekseni 23,4° eğiktir ve yıl boyunca hep aynı yöne bakar." }
+      ]
+    },
+    {
+      "title": "Haziran: kuzey Güneş'e dönük",
+      "narration": "Haziran gündönümünde kuzey yarımküre Güneş'e doğru eğiktir. Güneş gökyüzünde yüksekten geçer; aynı ışık daha küçük bir alana düşer ve gündüzler uzundur. Kuzeyde yaz, güneyde kış yaşanır.",
+      "elements": [
+        { "type": "text", "x": 760, "y": 718, "size": "sm", "anchor": "middle", "text": "Haziran" },
+        { "type": "arrow", "x1": 1060, "y1": 522, "x2": 816, "y2": 522, "color": "amber" },
+        { "type": "arrow", "x1": 1060, "y1": 560, "x2": 816, "y2": 560, "color": "amber" },
+        { "type": "text", "x": 60, "y": 635, "size": "sm", "text": "Haziran: kuzey yarımküre Güneş'e dönük. Işınlar dik gelir, gündüz uzun: yaz." }
+      ]
+    },
+    {
+      "title": "Aralık: kuzey Güneş'ten uzağa dönük",
+      "narration": "Altı ay sonra Dünya yörüngenin karşı tarafındadır. Eksen aynı yöne baktığı için bu kez kuzey yarımküre Güneş'ten uzağa eğiktir: ışınlar eğik gelir, aynı ışık daha geniş bir alana yayılır, gündüzler kısalır.",
+      "elements": [
+        { "type": "text", "x": 1500, "y": 718, "size": "sm", "anchor": "middle", "text": "Aralık" },
+        { "type": "arrow", "x1": 1200, "y1": 522, "x2": 1444, "y2": 522, "color": "amber" },
+        { "type": "arrow", "x1": 1200, "y1": 560, "x2": 1444, "y2": 560, "color": "amber" },
+        { "type": "text", "x": 60, "y": 740, "size": "sm", "text": "Aralık: kuzey Güneş'ten uzağa dönük. Işınlar eğik gelir, gündüz kısa: kış." }
+      ]
+    },
+    {
+      "title": "Özet",
+      "narration": "Güney yarımkürede mevsimler terstir. Bu da uzaklık açıklamasını çürütür: iki yarımküre Güneş'e aynı uzaklıktadır ama aynı anda zıt mevsimleri yaşar. Mart ve eylüldeki ekinokslarda iki yarımküre eşit ışık alır.",
+      "elements": [
+        { "type": "text", "x": 60, "y": 845, "size": "sm", "color": "green", "text": "Güneyde mevsimler terstir. Mevsimi eğiklik belirler, uzaklık değil." }
+      ]
+    }
+  ]
+}

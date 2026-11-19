@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "lang": "tr",
+  "question": "Pisagor teoremi neden doğru?",
+  "title": "Pisagor teoremi neden doğru?",
+  "summary": "Aynı kareyi dört eş dik üçgenle iki farklı biçimde doldurunca kalan alanlar eşit çıkar: a² + b² = c².",
+  "steps": [
+    {
+      "title": "Dik üçgen",
+      "narration": "Pisagor teoremi yalnızca dik üçgenler için geçerlidir: dik kenarların karelerinin toplamı, hipotenüsün karesine eşittir. Bunu alanları karşılaştırarak göreceğiz.",
+      "elements": [
+        { "type": "text", "x": 60, "y": 270, "size": "sm", "text": "Dik üçgen: dik kenarlar a ve b, hipotenüs c." },
+        { "type": "polyline", "points": [[140, 500], [350, 500], [140, 380]], "closed": true, "fill": "amber" },
+        { "type": "polyline", "points": [[140, 480], [160, 480], [160, 500]] },
+        { "type": "text", "x": 120, "y": 452, "size": "sm", "anchor": "end", "text": "a" },
+        { "type": "text", "x": 245, "y": 538, "size": "sm", "anchor": "middle", "text": "b" },
+        { "type": "text", "x": 262, "y": 425, "size": "sm", "color": "red", "text": "c" }
+      ]
+    },
+    {
+      "title": "Büyük kare, dört üçgen",
+      "narration": "Kenar uzunluğu a + b olan bir kare çizelim ve dört eş dik üçgeni köşelere, her kenar a ve b parçalarına ayrılacak biçimde yerleştirelim.",
+      "elements": [
+        { "type": "polyline", "points": [[740, 330], [860, 330], [740, 540]], "closed": true, "fill": "amber" },
+        { "type": "polyline", "points": [[860, 330], [1070, 330], [1070, 450]], "closed": true, "fill": "amber" },
+        { "type": "polyline", "points": [[1070, 450], [1070, 660], [950, 660]], "closed": true, "fill": "amber" },
+        { "type": "polyline", "points": [[950, 660], [740, 660], [740, 540]], "closed": true, "fill": "amber" },
+        { "type": "text", "x": 800, "y": 318, "size": "sm", "anchor": "middle", "text": "a" },
+        { "type": "text", "x": 965, "y": 318, "size": "sm", "anchor": "middle", "text": "b" },
+        { "type": "text", "x": 724, "y": 447, "size": "sm", "anchor": "end", "text": "b" },
+        { "type": "text", "x": 724, "y": 612, "size": "sm", "anchor": "end", "text": "a" },
+        { "type": "text", "x": 60, "y": 600, "size": "sm", "text": "Kenarı a + b olan kareye dört eş üçgen yerleştir." }
+      ]
+    },
+    {
+      "title": "Ortada kalan: c²",
+      "narration": "Ortadaki dörtgenin dört kenarı da c'dir. Köşelerindeki açı 90 derecedir, çünkü üçgenin iki dar açısının toplamı 90 derecedir ve doğru açıdan (180 derece) geriye 90 kalır. Yani ortada alanı c² olan bir kare vardır.",
+      "elements": [
+        { "type": "polyline", "points": [[860, 330], [1070, 450], [950, 660], [740, 540]], "closed": true, "color": "red", "fill": "red" },
+        { "type": "text", "x": 948, "y": 420, "size": "sm", "color": "red", "text": "c" },
+        { "type": "text", "x": 905, "y": 515, "size": "lg", "anchor": "middle", "color": "red", "text": "c²" },
+        { "type": "text", "x": 905, "y": 715, "size": "sm", "anchor": "middle", "color": "red", "text": "kalan alan: c²" },
+        { "type": "text", "x": 60, "y": 665, "size": "sm", "color": "red", "text": "Ortada kenarı c olan bir kare kalır: alanı c²." }
+      ]
+    },
+    {
+      "title": "Aynı kare, başka dizilim",
+      "narration": "Şimdi aynı büyüklükte ikinci bir kare alalım ve aynı dört üçgeni bu kez ikişer ikişer birleştirip iki tane a × b dikdörtgeni yapalım.",
+      "elements": [
+        { "type": "rect", "x": 1180, "y": 330, "w": 330, "h": 330 },
+        { "type": "rect", "x": 1300, "y": 330, "w": 210, "h": 120, "fill": "amber" },
+        { "type": "rect", "x": 1180, "y": 450, "w": 120, "h": 210, "fill": "amber" },
+        { "type": "line", "x1": 1300, "y1": 330, "x2": 1510, "y2": 450 },
+        { "type": "line", "x1": 1180, "y1": 450, "x2": 1300, "y2": 660 },
+        { "type": "text", "x": 1240, "y": 318, "size": "sm", "anchor": "middle", "text": "a" },
+        { "type": "text", "x": 1405, "y": 318, "size": "sm", "anchor": "middle", "text": "b" },
+        { "type": "text", "x": 1528, "y": 402, "size": "sm", "text": "a" },
+        { "type": "text", "x": 1528, "y": 567, "size": "sm", "text": "b" },
+        { "type": "text", "x": 60, "y": 730, "size": "sm", "text": "Aynı dört üçgeni iki dikdörtgen olarak diz." }
+      ]
+    },
+    {
+      "title": "Bu kez kalan: a² + b²",
+      "narration": "Dikdörtgenlerin dışında kalan bölge iki karedir: birinin kenarı a, diğerinin kenarı b. Toplam alanları a² + b².",
+      "elements": [
+        { "type": "rect", "x": 1180, "y": 330, "w": 120, "h": 120, "color": "blue", "fill": "blue" },
+        { "type": "text", "x": 1240, "y": 405, "size": "md", "anchor": "middle", "color": "blue", "text": "a²" },
+        { "type": "rect", "x": 1300, "y": 450, "w": 210, "h": 210, "color": "green", "fill": "green" },
+        { "type": "text", "x": 1405, "y": 572, "size": "lg", "anchor": "middle", "color": "green", "text": "b²" },
+        { "type": "text", "x": 1345, "y": 715, "size": "sm", "anchor": "middle", "text": "kalan alan: a² + b²" },
+        { "type": "text", "x": 60, "y": 780, "size": "sm", "text": "Bu kez geriye a² ve b² kareleri kalır." }
+      ]
+    },
+    {
+      "title": "Sonuç",
+      "narration": "İki büyük kare eşittir ve ikisinden de aynı dört üçgeni çıkardık. O halde geriye kalan alanlar da eşit olmalıdır: a² + b² = c². Bu, yeniden düzenlemeyle yapılan klasik bir ispattır.",
+      "elements": [
+        { "type": "text", "x": 60, "y": 830, "size": "sm", "color": "green", "text": "Kareler ve üçgenler aynı: kalan alanlar eşit!" },
+        { "type": "text", "x": 1125, "y": 815, "size": "lg", "anchor": "middle", "color": "green", "text": "a² + b² = c²" }
+      ]
+    }
+  ]
+}

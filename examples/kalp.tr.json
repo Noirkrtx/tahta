@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "lang": "tr",
+  "question": "Kalp nasıl pompalar? (sağ-sol dolaşım)",
+  "title": "Kalp nasıl pompalar?",
+  "summary": "Kalp yan yana iki pompadır: sağ taraf kanı akciğerlere, sol taraf tüm vücuda gönderir.",
+  "steps": [
+    {
+      "title": "Dört odacık",
+      "narration": "Şema basitleştirilmiştir ve karşıdan bakışa göredir: kalbin sağ tarafı çizimde solda görünür. Kulakçıklar kanı toplar, karıncıklar pompalar.",
+      "elements": [
+        { "type": "rect", "x": 900, "y": 530, "w": 480, "h": 180 },
+        { "type": "line", "x1": 1140, "y1": 530, "x2": 1140, "y2": 710 },
+        { "type": "rect", "x": 900, "y": 400, "w": 170, "h": 110 },
+        { "type": "rect", "x": 1210, "y": 400, "w": 170, "h": 110 },
+        { "type": "text", "x": 985, "y": 448, "size": "sm", "anchor": "middle", "text": "Sağ kulakçık" },
+        { "type": "text", "x": 1295, "y": 448, "size": "sm", "anchor": "middle", "text": "Sol kulakçık" },
+        { "type": "text", "x": 1020, "y": 675, "size": "sm", "anchor": "middle", "text": "Sağ karıncık" },
+        { "type": "text", "x": 1260, "y": 675, "size": "sm", "anchor": "middle", "text": "Sol karıncık" },
+        { "type": "text", "x": 60, "y": 270, "size": "sm", "text": "Kalpte dört odacık vardır: üstte iki kulakçık, altta iki karıncık." }
+      ]
+    },
+    {
+      "title": "Vücuttan sağ kalbe",
+      "narration": "Vücuttan dönen oksijeni azalmış kan, üst ve alt ana toplardamarlarla (vena kava) sağ kulakçığa gelir; triküspit kapaktan geçerek sağ karıncığa dolar.",
+      "elements": [
+        { "type": "ellipse", "cx": 1140, "cy": 815, "rx": 185, "ry": 42 },
+        { "type": "text", "x": 1140, "y": 827, "size": "sm", "anchor": "middle", "text": "Vücut" },
+        { "type": "curve", "points": [[958, 805], [800, 750], [770, 560], [892, 455]], "color": "blue", "arrowEnd": true },
+        { "type": "arrow", "x1": 985, "y1": 468, "x2": 985, "y2": 600, "color": "blue" },
+        { "type": "text", "x": 60, "y": 375, "size": "sm", "color": "blue", "text": "Oksijeni azalmış kan vücuttan sağ kulakçığa döner, oradan sağ karıncığa geçer." }
+      ]
+    },
+    {
+      "title": "Küçük dolaşım: akciğerler",
+      "narration": "Sağ karıncık kasılınca kan akciğer atardamarıyla akciğerlere gider. Bu damar, atardamar olduğu halde oksijeni az kan taşır. Akciğerlerde kan karbondioksit verir, oksijen alır: buna küçük dolaşım denir.",
+      "elements": [
+        { "type": "ellipse", "cx": 1140, "cy": 290, "rx": 180, "ry": 45 },
+        { "type": "text", "x": 1140, "y": 302, "size": "sm", "anchor": "middle", "text": "Akciğerler" },
+        { "type": "arrow", "x1": 1105, "y1": 570, "x2": 1105, "y2": 342, "color": "blue" },
+        { "type": "text", "x": 60, "y": 480, "size": "sm", "color": "blue", "text": "Sağ karıncık kanı akciğerlere pompalar: kan karbondioksit bırakır, oksijen alır." }
+      ]
+    },
+    {
+      "title": "Akciğerlerden sol kalbe",
+      "narration": "Oksijenlenen kan akciğer toplardamarlarıyla sol kulakçığa döner ve mitral kapaktan sol karıncığa geçer.",
+      "elements": [
+        { "type": "arrow", "x1": 1300, "y1": 320, "x2": 1300, "y2": 394, "color": "red" },
+        { "type": "arrow", "x1": 1295, "y1": 468, "x2": 1295, "y2": 600, "color": "red" },
+        { "type": "text", "x": 60, "y": 585, "size": "sm", "color": "red", "text": "Oksijenlenen kan sol kulakçığa döner, oradan sol karıncığa geçer." }
+      ]
+    },
+    {
+      "title": "Büyük dolaşım: tüm vücut",
+      "narration": "Sol karıncık kanı aort kapağından aorta, oradan tüm vücuda pompalar: büyük dolaşım. Vücut dolaşımının direnci daha yüksek olduğu için sol karıncığın duvarı sağdakinden belirgin biçimde kalındır. Gerçekte aort kalbin üstünden çıkıp kavis yapar; çizimde yandan gösterildi.",
+      "elements": [
+        { "type": "curve", "points": [[1380, 620], [1505, 650], [1500, 770], [1328, 812]], "color": "red", "arrowEnd": true },
+        { "type": "text", "x": 1518, "y": 715, "size": "sm", "color": "red", "text": "aort" },
+        { "type": "text", "x": 60, "y": 690, "size": "sm", "color": "red", "text": "Sol karıncık kanı aortla tüm vücuda pompalar; duvarı daha kalındır." }
+      ]
+    },
+    {
+      "title": "Kapakçıklar ve özet",
+      "narration": "Dört kapak kanın geri kaçmasını önler. İki kulakçık birlikte, ardından iki karıncık birlikte kasılır; yani iki pompa aynı anda çalışır ve her atımda yaklaşık aynı miktarda kan gönderir.",
+      "elements": [
+        { "type": "text", "x": 60, "y": 795, "size": "sm", "color": "green", "text": "Kapakçıklar akışı tek yönlü tutar. İki taraf aynı anda kasılır." }
+      ]
+    }
+  ]
+}

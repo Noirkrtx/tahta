@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "lang": "tr",
+  "question": "Fotosentez kısaca",
+  "title": "Fotosentez kısaca",
+  "summary": "Bitkiler ışık enerjisiyle su ve karbondioksitten şeker üretir, bu sırada oksijen açığa çıkar.",
+  "steps": [
+    {
+      "title": "Güneş ve yaprak",
+      "narration": "Fotosentez bitkilerde, alglerde ve bazı bakterilerde görülür. Bitkilerde yaprak hücrelerindeki kloroplastlarda gerçekleşir; ışığı yakalayan pigment klorofildir.",
+      "elements": [
+        { "type": "circle", "cx": 810, "cy": 310, "r": 45, "color": "amber", "fill": "amber" },
+        { "type": "path", "d": "M 940 590 C 1000 420 1260 400 1390 520 C 1310 690 1050 720 940 590 Z", "color": "green", "fill": "green" },
+        { "type": "curve", "points": [[940, 590], [1080, 572], [1240, 548], [1390, 520]], "color": "green" },
+        { "type": "line", "x1": 940, "y1": 590, "x2": 872, "y2": 640, "color": "green" },
+        { "type": "line", "x1": 1065, "y1": 574, "x2": 1110, "y2": 508, "color": "green" },
+        { "type": "line", "x1": 1065, "y1": 574, "x2": 1125, "y2": 640, "color": "green" },
+        { "type": "line", "x1": 1215, "y1": 552, "x2": 1262, "y2": 488, "color": "green" },
+        { "type": "line", "x1": 1215, "y1": 552, "x2": 1272, "y2": 612, "color": "green" },
+        { "type": "text", "x": 60, "y": 270, "size": "sm", "text": "Fotosentez, yaprak hücrelerindeki kloroplastlarda gerçekleşir." }
+      ]
+    },
+    {
+      "title": "Işık yakalanır",
+      "narration": "Klorofil en çok kırmızı ve mavi dalga boylarını soğurur, yeşil ışığın çoğunu yansıtır; yapraklar bu yüzden yeşil görünür.",
+      "elements": [
+        { "type": "arrow", "x1": 848, "y1": 345, "x2": 1010, "y2": 480, "color": "amber", "label": "ışık" },
+        { "type": "text", "x": 60, "y": 375, "size": "sm", "color": "amber", "text": "Klorofil en çok kırmızı ve mavi ışığı soğurur, yeşili yansıtır." }
+      ]
+    },
+    {
+      "title": "Su ve karbondioksit girer",
+      "narration": "Su köklerden alınır ve odun boruları (ksilem) ile yaprağa taşınır. Karbondioksit havadan, yaprak yüzeyindeki stoma denen gözeneklerden girer.",
+      "elements": [
+        { "type": "arrow", "x1": 800, "y1": 762, "x2": 862, "y2": 656, "color": "blue", "label": "su" },
+        { "type": "arrow", "x1": 1500, "y1": 340, "x2": 1335, "y2": 468, "label": "karbondioksit" },
+        { "type": "text", "x": 60, "y": 480, "size": "sm", "color": "blue", "text": "Su köklerden, karbondioksit yapraktaki gözeneklerden (stoma) girer." }
+      ]
+    },
+    {
+      "title": "Işık tepkimeleri: oksijen",
+      "narration": "Işığa bağlı tepkimelerde ışık enerjisi suyu parçalar. Havaya verilen oksijen sudan gelir, karbondioksitten değil. Bu aşamada enerji ATP ve NADPH olarak depolanır.",
+      "elements": [
+        { "type": "arrow", "x1": 1340, "y1": 612, "x2": 1500, "y2": 722, "color": "red", "label": "oksijen" },
+        { "type": "text", "x": 60, "y": 585, "size": "sm", "color": "red", "text": "Işık enerjisi suyu parçalar: oksijen açığa çıkar. Oksijen sudan gelir!" }
+      ]
+    },
+    {
+      "title": "Şeker üretimi (Calvin döngüsü)",
+      "narration": "Calvin döngüsünde ATP ve NADPH'nin enerjisiyle karbondioksit şekere bağlanır. Üretilen şeker bitkinin besini ve yapı taşıdır; fazlası çoğunlukla nişasta olarak depolanır.",
+      "elements": [
+        { "type": "arrow", "x1": 1150, "y1": 695, "x2": 1150, "y2": 800, "color": "green", "label": "şeker (glikoz)" },
+        { "type": "text", "x": 60, "y": 690, "size": "sm", "color": "green", "text": "Karbondioksit, yakalanan enerjiyle şekere (glikoz) dönüşür." }
+      ]
+    },
+    {
+      "title": "Özet",
+      "narration": "Toplam denklem: 6 CO₂ + 6 H₂O + ışık enerjisi → C₆H₁₂O₆ + 6 O₂. Bu, pek çok ara basamağın özetidir; tek adımda gerçekleşmez.",
+      "elements": [
+        { "type": "text", "x": 60, "y": 795, "size": "sm", "text": "Özet: su + karbondioksit + ışık, şeker ve oksijene dönüşür." }
+      ]
+    }
+  ]
+}
