@@ -32,6 +32,17 @@ Kendi sorun için bir Anthropic API anahtarı gerekir. Arka uç sunucusu yoktur.
 - Model adı serbest metindir. Varsayılan `claude-fable-5-2`; daha ucuz modeller de çalışır, çizimler daha sade olur.
 - Modelin ürettiği tahta hata içerebilir. Uygulama bunu üretilen her tahtanın altında belirtir; önemli bilgiyi doğrula.
 
+## Claude hesabınla kullan (artifact)
+
+[`artifact/tahta-artifact.html`](artifact/tahta-artifact.html) uygulamanın tek dosyalık hali (JS, CSS, font ve hazır örnekler içinde, yaklaşık 260 KiB, ağ isteği yok). Claude içinde artifact olarak açıldığında Claude'a `window.claude.complete` ile sorar: API anahtarı gerekmez, kullanım giriş yapmış kişinin kendi Claude planından düşer. Claude dışında yukarıdaki anahtarlı kipe döner.
+
+1. Dosyayı üret ya da depodaki kopyayı kullan: `npm ci && npm run build:artifact`.
+2. Claude Code ile (Pro, Max, Ultra, Team ya da Enterprise; `/login` ile giriş yapılmış): bu klasörde `claude` başlat ve *"artifact/tahta-artifact.html dosyasını hiç değiştirmeden artifact olarak yayımla"* de.
+3. Ya da claude.ai / Claude Desktop'ta bir sohbette (*Settings > Capabilities > Cloud code execution and file creation* açıkken): dosyayı ekle, Claude'dan onu değiştirmeden HTML artifact olarak açmasını iste. Artifact ilk kez izin istediğinde Claude erişimine izin ver.
+4. Artifact'teki **Share** ile paylaş.
+
+Sınırlar: model seçimi yok; görüntüleyici sayfanın kendi başlattığı indirmeleri engellediği için dışa aktarma düğmeleri gizli. Anthropic'in yardım sayfalarına göre kişisel planlarda paylaşılan bir artifact'in Claude kullanan bölümleri senden başkası için çalışmıyor (Team ya da Enterprise kuruluşunun üyeleri kullanabiliyor). İşlevin adı Anthropic'in herkese açık belgelerinde yok ve adımlar gerçek bir Claude hesabında denenmedi. Ayrıntılar, alıntılar ve kaynaklar: [artifact/README.md](artifact/README.md).
+
 ## Yerelde çalıştırma
 
 Node 22 ya da üstü gerekir (Vite 8).
@@ -42,6 +53,7 @@ npm run dev        # geliştirme sunucusu
 npm test           # vitest
 npm run build      # tip denetimi + dist/ içine üretim derlemesi
 npm run preview    # dist/ klasörünü GitHub Pages gibi /tahta/ altında sunar
+npm run build:artifact  # tek dosyalık artifact/tahta-artifact.html
 ```
 
 Üretim derlemesi `/tahta/` yolundan sunulacağını varsayar (`vite.config.ts`). Başka yerde barındıracaksan oradaki `base` değerini değiştir.
@@ -77,18 +89,18 @@ Doğrulama sıkıdır: bilinmeyen alanlar, bilinmeyen öğe türleri, aralık d�
 ## Nasıl yapıldı
 
 - Vite + TypeScript; çerçeve yok, çalışma zamanı bağımlılığı yok.
-- `src/schema.ts` doğrulama · `src/rough.ts` tohumlu el çizimi geometrisi · `src/layout.ts` satır kaydırma ve çakışma düzeltmesi · `src/compile.ts` senaryo → çizim işlemleri · `src/timeline.ts` zamanlama ve adım gezinme · `src/board.ts` SVG çizimi (darbeler için `stroke-dashoffset`, metin için kırpma dikdörtgeni) · `src/player.ts` oynatma · `src/llm.ts` + `src/prompt.ts` model çağrısı · `src/export.ts` SVG/PNG.
+- `src/schema.ts` doğrulama · `src/rough.ts` tohumlu el çizimi geometrisi · `src/layout.ts` satır kaydırma ve çakışma düzeltmesi · `src/compile.ts` senaryo → çizim işlemleri · `src/timeline.ts` zamanlama ve adım gezinme · `src/board.ts` SVG çizimi (darbeler için `stroke-dashoffset`, metin için kırpma dikdörtgeni) · `src/player.ts` oynatma · `src/llm.ts` + `src/prompt.ts` model çağrısı (Claude içinde `src/llm-artifact.ts`) · `src/export.ts` SVG/PNG.
 - Görüntü zamanın saf bir fonksiyonudur; ileri-geri sarma, adım geri alma ve dışa aktarma aynı kod yolunu kullanır.
 - Senaryo metni DOM'a yalnız `textContent` ile girer; yol verisi izinli komut listesine göre ayrıştırılıp yeniden yazılır.
 - El yazısı fontu: [Caveat](https://github.com/googlefonts/caveat) (SIL Open Font License 1.1); lisansıyla birlikte `src/assets/fonts/` altında. Bir test font dosyalarını okuyup Türk alfabesinin ve demolarda kullanılan her karakterin fontta bulunduğunu denetler.
 
-`docs/ekran/` altındaki görüntüleri `scripts/ekran.py` (Python Playwright) üretim derlemesinden alır; aynı kod klavye kontrollerini ve dışa aktarmayı da dener.
+`docs/ekran/` altındaki görüntüleri `scripts/ekran.py` (Python Playwright) üretim derlemesinden alır; aynı kod klavye kontrollerini ve dışa aktarmayı da dener. `scripts/artifact_check.py` aynısını tek dosyalık artifact için sahte bir `window.claude` ile yapar ([docs/ekran/artifact.png](docs/ekran/artifact.png)).
 
 ## Sınırlar
 
 - Her cevap tek tahtadır: hiçbir şey silinmez, uzun anlatımın 1600×900'e sığması gerekir.
 - Çakışma düzeltmesi yalnız metin bloklarını aşağı iter; şekilleri ve ok etiketlerini ayırmaz. Modelin ürettiği yerleşimde çakışma kalabilir.
-- LLM yolu yalnız sahte bir API ile test edildi. Bu deponun testlerinde gerçek API'ye çağrı yapılmadı.
+- LLM yolu yalnız sahte bir API ile test edildi. Bu deponun testlerinde gerçek API'ye çağrı yapılmadı. Artifact yolu da yalnız sahte bir `window.claude` ile denendi.
 - Metin, hareket eden bir kırpma ile belirir; harfler tek tek kalem darbesiyle çizilmez.
 - Video dışa aktarma henüz yok.
 - Mevsimler dışındaki demolar yalnız Türkçedir.

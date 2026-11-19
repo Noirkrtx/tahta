@@ -32,6 +32,17 @@ Your own questions need an Anthropic API key. There is no backend.
 - The model name is free text. The default is `claude-fable-5-2`; cheaper models work too, with simpler drawings.
 - Generated boards can contain mistakes. The app says so next to every generated board; verify anything that matters.
 
+## Use with your Claude account (artifact)
+
+[`artifact/tahta-artifact.html`](artifact/tahta-artifact.html) is the whole app in one file (JS, CSS, font and demos inlined, about 260 KiB, no network requests). Opened as an artifact inside Claude, it asks Claude through `window.claude.complete`: no API key, and the usage counts against the signed-in person's own Claude plan. Outside Claude it falls back to the key-based mode above.
+
+1. Build it, or use the committed copy: `npm ci && npm run build:artifact`.
+2. With Claude Code (Pro, Max, Ultra, Team or Enterprise, signed in with `/login`): start `claude` in this folder and ask *"Publish artifact/tahta-artifact.html as an artifact exactly as it is."*
+3. Or in a chat on claude.ai / Claude Desktop (with *Settings > Capabilities > Cloud code execution and file creation* on): attach the file and ask Claude to open it unchanged as an HTML artifact. Allow Claude access when the artifact first asks.
+4. Share it with **Share** in the artifact.
+
+Limits: there is no model choice, and exports are hidden because the artifact viewer blocks downloads the page starts itself. On personal plans, Anthropic's help pages say the parts of a shared artifact that use Claude don't work for anyone but you (members of a Team or Enterprise organization can use them). The function name is not in Anthropic's public docs, and the steps have not been tried in a real Claude account. Details, quotes and sources: [artifact/README.md](artifact/README.md).
+
 ## Run it locally
 
 Requires Node 22 or newer (Vite 8).
@@ -42,6 +53,7 @@ npm run dev        # development server
 npm test           # vitest
 npm run build      # type-check + production build into dist/
 npm run preview    # serves dist/ under /tahta/, like GitHub Pages
+npm run build:artifact  # single-file artifact/tahta-artifact.html
 ```
 
 The production build assumes it is served from `/tahta/` (see `vite.config.ts`). Change `base` there if you host it elsewhere.
@@ -77,18 +89,18 @@ Validation is strict: unknown fields, unknown element types, out-of-range number
 ## How it is built
 
 - Vite + TypeScript, no framework, no runtime dependencies.
-- `src/schema.ts` validation · `src/rough.ts` seeded hand-drawn geometry · `src/layout.ts` text wrapping and overlap fix · `src/compile.ts` scenario → drawing operations · `src/timeline.ts` timing and step navigation · `src/board.ts` SVG rendering (`stroke-dashoffset` for strokes, clip rectangles for text) · `src/player.ts` playback · `src/llm.ts` + `src/prompt.ts` the model call · `src/export.ts` SVG/PNG.
+- `src/schema.ts` validation · `src/rough.ts` seeded hand-drawn geometry · `src/layout.ts` text wrapping and overlap fix · `src/compile.ts` scenario → drawing operations · `src/timeline.ts` timing and step navigation · `src/board.ts` SVG rendering (`stroke-dashoffset` for strokes, clip rectangles for text) · `src/player.ts` playback · `src/llm.ts` + `src/prompt.ts` the model call (`src/llm-artifact.ts` inside Claude) · `src/export.ts` SVG/PNG.
 - The picture is a pure function of time, so seeking, stepping back and exporting share one code path.
 - Scenario text reaches the DOM only through `textContent`; path data is parsed and re-serialised from a whitelist.
 - Handwriting font: [Caveat](https://github.com/googlefonts/caveat) (SIL Open Font License 1.1), bundled in `src/assets/fonts/` with its licence. A test reads the font files and checks that the Turkish alphabet and every character used in the demos are present.
 
-Screenshots in `docs/ekran/` are produced by `scripts/ekran.py` (Python Playwright) from the production build; the script also exercises the keyboard controls and the exports.
+Screenshots in `docs/ekran/` are produced by `scripts/ekran.py` (Python Playwright) from the production build; the script also exercises the keyboard controls and the exports. `scripts/artifact_check.py` does the same for the single-file artifact with a fake `window.claude` ([docs/ekran/artifact.png](docs/ekran/artifact.png)).
 
 ## Limits
 
 - One board per answer: nothing is erased, so long explanations have to fit 1600×900.
 - The overlap fix only moves text blocks down; it does not untangle shapes or arrow labels. Model-generated layouts can still collide.
-- The LLM path is tested against a fake API only. It has not been run against the real API in this repository's test suite.
+- The LLM path is tested against a fake API only. It has not been run against the real API in this repository's test suite. The artifact path is likewise tested only with a fake `window.claude`.
 - Text is revealed with a moving clip, not drawn glyph stroke by glyph stroke.
 - No video export yet.
 - Demos other than the seasons one exist in Turkish only.
