@@ -11,7 +11,16 @@ import { validateScenario, type Lang, type Scenario } from './schema';
 export const API_URL = 'https://api.anthropic.com/v1/messages';
 export const API_VERSION = '2023-06-01';
 
-export type TahtaErrorCode = 'no-key' | 'no-question' | 'network' | 'http' | 'empty' | 'invalid';
+export type TahtaErrorCode =
+  | 'no-key'
+  | 'no-question'
+  | 'network'
+  | 'http'
+  | 'empty'
+  | 'invalid'
+  /** Artifact mode: window.claude is missing or its call was rejected. */
+  | 'no-claude'
+  | 'claude';
 
 export class TahtaError extends Error {
   constructor(
@@ -41,7 +50,7 @@ export interface GenerateResult {
   repaired: boolean;
 }
 
-interface Message {
+export interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
@@ -116,28 +125,36 @@ function check(text: string): { ok: true; scenario: Scenario } | { ok: false; er
   return validateScenario(raw);
 }
 
+/** One model round trip: system prompt + conversation in, reply text out. */
+export type Complete = (system: string, messages: Message[]) => Promise<string>;
+
 /**
- * Ask the model for a board scenario. Invalid output gets exactly one repair
- * request that lists the validation errors; if that fails too, a TahtaError
- * with code "invalid" is thrown.
+ * The transport-independent part: build the prompts, validate the reply and,
+ * if it is invalid, send exactly one repair request that lists the
+ * validation errors. If that fails too, a TahtaError with code "invalid" is
+ * thrown. Used by both the API-key client and the Claude artifact client.
  */
-export async function generateScenario(opts: GenerateOptions): Promise<GenerateResult> {
-  const question = opts.question.trim();
-  if (!opts.apiKey.trim()) throw new TahtaError('no-key', 'API key is missing');
-  if (!question) throw new TahtaError('no-question', 'question is empty');
+export async function runWithRepair(question: string, lang: Lang, complete: Complete): Promise<GenerateResult> {
+  const system = buildSystemPrompt(lang);
+  const messages: Message[] = [{ role: 'user', content: buildUserPrompt(question, lang) }];
 
-  const system = buildSystemPrompt(opts.lang);
-  const messages: Message[] = [{ role: 'user', content: buildUserPrompt(question, opts.lang) }];
-
-  const first = await callApi(opts, system, messages);
+  const first = await complete(system, messages);
   const firstCheck = check(first);
   if (firstCheck.ok) return { scenario: { ...firstCheck.scenario, question }, repaired: false };
 
   messages.push({ role: 'assistant', content: first });
   messages.push({ role: 'user', content: buildRepairPrompt(firstCheck.errors) });
-  const second = await callApi(opts, system, messages);
+  const second = await complete(system, messages);
   const secondCheck = check(second);
   if (secondCheck.ok) return { scenario: { ...secondCheck.scenario, question }, repaired: true };
 
   throw new TahtaError('invalid', 'model did not return a valid board scenario', secondCheck.errors);
+}
+
+/** Ask the model for a board scenario through the Anthropic API (bring-your-own-key). */
+export async function generateScenario(opts: GenerateOptions): Promise<GenerateResult> {
+  const question = opts.question.trim();
+  if (!opts.apiKey.trim()) throw new TahtaError('no-key', 'API key is missing');
+  if (!question) throw new TahtaError('no-question', 'question is empty');
+  return runWithRepair(question, opts.lang, (system, messages) => callApi(opts, system, messages));
 }
