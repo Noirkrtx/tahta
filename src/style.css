@@ -187,6 +187,17 @@ button.danger {
   text-transform: uppercase;
 }
 
+[hidden] {
+  display: none !important;
+}
+.mode-note {
+  margin: 8px 0 0;
+  padding: 6px 12px;
+  border-left: 3px solid var(--green, #2e7d4f);
+  background: #f3f8f2;
+  border-radius: 4px;
+  font-size: 14px;
+}
 .status {
   margin: 8px 0;
   padding: 10px 14px;

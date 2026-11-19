@@ -26,9 +26,10 @@
         <button type="submit" id="btn-ask" class="primary" data-i18n="ask"></button>
       </form>
       <div class="demos">
-        <span data-i18n="demos"></span>
+        <span id="demos-label" data-i18n="demos"></span>
         <span id="demo-list" class="chips"></span>
       </div>
+      <p id="mode-note" class="mode-note" data-i18n="artifactNote" hidden></p>
       <div id="status" class="status" role="status" aria-live="polite" hidden></div>
 
       <div class="stage">
@@ -64,7 +65,7 @@
       </div>
     </main>
 
-    <footer><span data-i18n="footer"></span></footer>
+    <footer><span id="footer-text" data-i18n="footer"></span></footer>
 
     <dialog id="settings">
       <form method="dialog" id="settings-form">

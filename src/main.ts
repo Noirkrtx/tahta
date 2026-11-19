@@ -5,6 +5,7 @@ import { download, finalSvg, scenarioBlob, slugify, svgToPng } from './export';
 import { t } from './i18n';
 import { FONT_FAMILY, estimateWidth, type Measure } from './layout';
 import { TahtaError, generateScenario } from './llm';
+import { generateScenarioWithClaude, getClaudeHost, type CallForm } from './llm-artifact';
 import { Player, SPEEDS, type PlayerState } from './player';
 import { DEFAULT_MODEL } from './prompt';
 import { validateScenario, type Lang, type Scenario } from './schema';
@@ -46,6 +47,9 @@ let generated = false;
 let busy = false;
 let lastStep = -1;
 let measure: Measure = estimateWidth;
+/** Artifact mode: running inside Claude with window.claude available; no API key or settings. */
+let artifactMode = false;
+let claudeForm: CallForm | undefined;
 
 // --- text measuring with the real font ---------------------------------------
 
@@ -133,7 +137,11 @@ function errorMessage(e: unknown): { message: string; details: string[] } {
       case 'empty':
         return { message: t(lang, 'errEmpty'), details: [] };
       case 'invalid':
-        return { message: t(lang, 'errInvalid'), details: e.details };
+        return { message: t(lang, artifactMode ? 'errInvalidArtifact' : 'errInvalid'), details: e.details };
+      case 'no-claude':
+        return { message: t(lang, 'errNoClaude'), details: [] };
+      case 'claude':
+        return { message: t(lang, 'errClaude'), details: e.details };
       case 'http': {
         const specific = e.status === 401 || e.status === 404 || e.status === 429 ? `errHttp${e.status}` : 'errHttp';
         return { message: t(lang, specific, { status: e.status ?? '?' }), details: e.details };
@@ -252,13 +260,14 @@ function loadExample(id: string, autoplay: boolean, at?: number): boolean {
 
 async function ask(): Promise<void> {
   if (busy) return;
+  if (!artifactMode && getClaudeHost()) applyMode(true); // helper injected after load
   const question = ($('question') as HTMLInputElement).value;
   const apiKey = readStore(STORE.key) ?? '';
   if (!question.trim()) {
     setStatus(t(lang, 'errNoQuestion'), { error: true });
     return;
   }
-  if (!apiKey) {
+  if (!artifactMode && !apiKey) {
     setStatus(t(lang, 'errNoKey'), { error: true });
     openSettings();
     return;
@@ -268,12 +277,18 @@ async function ask(): Promise<void> {
   btn.disabled = true;
   setStatus(t(lang, 'asking'));
   try {
-    const res = await generateScenario({
-      apiKey,
-      model: readStore(STORE.model) || DEFAULT_MODEL,
-      question,
-      lang,
-    });
+    let res;
+    if (artifactMode) {
+      res = await generateScenarioWithClaude({ question, lang, form: claudeForm });
+      claudeForm = res.form;
+    } else {
+      res = await generateScenario({
+        apiKey,
+        model: readStore(STORE.model) || DEFAULT_MODEL,
+        question,
+        lang,
+      });
+    }
     currentExample = null;
     generated = true;
     renderDemos();
@@ -286,6 +301,23 @@ async function ask(): Promise<void> {
     busy = false;
     btn.disabled = false;
   }
+}
+
+/**
+ * Switch the UI between the API-key build and the Claude artifact build.
+ * In artifact mode the key/model settings are hidden (Claude pays from the
+ * viewer's own plan) and so are the download buttons: the artifact viewer
+ * blocks downloads a page starts by itself.
+ */
+function applyMode(artifact: boolean): void {
+  artifactMode = artifact;
+  document.documentElement.dataset.mode = artifact ? 'artifact' : 'byok';
+  $('btn-settings').hidden = artifact;
+  $('mode-note').hidden = !artifact;
+  $('demos-label').dataset.i18n = artifact ? 'demosArtifact' : 'demos';
+  $('footer-text').dataset.i18n = artifact ? 'footerArtifact' : 'footer';
+  for (const id of ['btn-json', 'btn-svg', 'btn-png']) $(id).hidden = artifact;
+  applyI18n();
 }
 
 // --- settings ------------------------------------------------------------------------
@@ -417,7 +449,7 @@ function wire(): void {
 
 async function init(): Promise<void> {
   wire();
-  applyI18n();
+  applyMode(getClaudeHost() !== null);
   await loadFonts();
   // ?demo=<id>&at=<0..1> opens a demo paused at a fraction of its timeline (used for screenshots and sharing).
   const demo = params.get('demo');
