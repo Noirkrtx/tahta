@@ -55,7 +55,7 @@
       "narration": "Sol karıncık kanı aort kapağından aorta, oradan tüm vücuda pompalar: büyük dolaşım. Vücut dolaşımının direnci daha yüksek olduğu için sol karıncığın duvarı sağdakinden belirgin biçimde kalındır. Gerçekte aort kalbin üstünden çıkıp kavis yapar; çizimde yandan gösterildi.",
       "elements": [
         { "type": "curve", "points": [[1380, 620], [1505, 650], [1500, 770], [1328, 812]], "color": "red", "arrowEnd": true },
-        { "type": "text", "x": 1518, "y": 715, "size": "sm", "color": "red", "text": "aort" },
+        { "type": "text", "x": 1534, "y": 715, "size": "sm", "color": "red", "text": "aort" },
         { "type": "text", "x": 60, "y": 690, "size": "sm", "color": "red", "text": "Sol karıncık kanı aortla tüm vücuda pompalar; duvarı daha kalındır." }
       ]
     },

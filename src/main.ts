@@ -221,6 +221,9 @@ function mountScenario(scn: Scenario, opts: { autoplay: boolean; at?: number }):
   player?.destroy();
   scenario = scn;
   board = buildBoard(scn, measure);
+  // Number of automatic text nudges; read by the screenshot script to catch layout regressions.
+  document.documentElement.dataset.layoutFixes = String(board.compiled.adjustments.length);
+  document.documentElement.dataset.layoutNotes = board.compiled.adjustments.join(' | ');
   $('board').replaceChildren(board.svg);
   player = new Player(board, (s) => onPlayerChange(s));
   renderSteps();
