@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build:artifact": "tsc --noEmit && node scripts/build-artifact.mjs",
     "preview": "node scripts/onizle.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
