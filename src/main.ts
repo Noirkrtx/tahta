@@ -3,6 +3,7 @@ import { buildBoard, type Board } from './board';
 import { EXAMPLES, counterpart, defaultExample, findExample } from './examples';
 import { download, finalSvg, scenarioBlob, slugify, svgToPng } from './export';
 import { t } from './i18n';
+import { installFontFaces } from './fonts';
 import { FONT_FAMILY, estimateWidth, type Measure } from './layout';
 import { TahtaError, generateScenario } from './llm';
 import { generateScenarioWithClaude, getClaudeHost, type CallForm } from './llm-artifact';
@@ -448,6 +449,7 @@ function wire(): void {
 }
 
 async function init(): Promise<void> {
+  if (import.meta.env.MODE === 'artifact') installFontFaces();
   wire();
   applyMode(getClaudeHost() !== null);
   await loadFonts();

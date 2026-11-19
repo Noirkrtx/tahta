@@ -2,21 +2,12 @@
 import { buildBoard } from './board';
 import { FONT_FAMILY, type Measure } from './layout';
 import { CANVAS, type Scenario } from './schema';
-import latin500 from './assets/fonts/caveat-latin-500-normal.woff2?url';
-import latinExt500 from './assets/fonts/caveat-latin-ext-500-normal.woff2?url';
-import latin700 from './assets/fonts/caveat-latin-700-normal.woff2?url';
-import latinExt700 from './assets/fonts/caveat-latin-ext-700-normal.woff2?url';
-
-const FONT_FILES = [
-  { url: latin500, weight: 500 },
-  { url: latinExt500, weight: 500 },
-  { url: latin700, weight: 700 },
-  { url: latinExt700, weight: 700 },
-];
+import { FONT_FILES } from './fonts';
 
 let fontCssCache: Promise<string> | null = null;
 
 async function toDataUrl(url: string): Promise<string> {
+  if (url.startsWith('data:')) return url; // already inlined (single-file build)
   const buf = new Uint8Array(await (await fetch(url)).arrayBuffer());
   let bin = '';
   for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode(...buf.subarray(i, i + 0x8000));
