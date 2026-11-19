@@ -56,7 +56,7 @@
         { "type": "text", "x": 760, "y": 718, "size": "sm", "anchor": "middle", "text": "Haziran" },
         { "type": "arrow", "x1": 1060, "y1": 522, "x2": 816, "y2": 522, "color": "amber" },
         { "type": "arrow", "x1": 1060, "y1": 560, "x2": 816, "y2": 560, "color": "amber" },
-        { "type": "text", "x": 60, "y": 635, "size": "sm", "text": "Haziran: kuzey yarımküre Güneş'e dönük. Işınlar dik gelir, gündüz uzun: yaz." }
+        { "type": "text", "x": 60, "y": 635, "size": "sm", "text": "Haziran: kuzey yarımküre Güneş'e dönük. Işınlar daha dik gelir, gündüz uzun: yaz." }
       ]
     },
     {

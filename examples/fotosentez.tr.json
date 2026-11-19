@@ -42,7 +42,7 @@
       "narration": "Işığa bağlı tepkimelerde ışık enerjisi suyu parçalar. Havaya verilen oksijen sudan gelir, karbondioksitten değil. Bu aşamada enerji ATP ve NADPH olarak depolanır.",
       "elements": [
         { "type": "arrow", "x1": 1340, "y1": 612, "x2": 1500, "y2": 722, "color": "red", "label": "oksijen" },
-        { "type": "text", "x": 60, "y": 585, "size": "sm", "color": "red", "text": "Işık enerjisi suyu parçalar: oksijen açığa çıkar. Oksijen sudan gelir!" }
+        { "type": "text", "x": 60, "y": 585, "size": "sm", "color": "red", "text": "Işığa bağlı tepkimelerde su parçalanır: oksijen açığa çıkar. Oksijen sudan gelir!" }
       ]
     },
     {
@@ -57,7 +57,7 @@
       "title": "Özet",
       "narration": "Toplam denklem: 6 CO₂ + 6 H₂O + ışık enerjisi → C₆H₁₂O₆ + 6 O₂. Bu, pek çok ara basamağın özetidir; tek adımda gerçekleşmez.",
       "elements": [
-        { "type": "text", "x": 60, "y": 795, "size": "sm", "text": "Özet: su + karbondioksit + ışık, şeker ve oksijene dönüşür." }
+        { "type": "text", "x": 60, "y": 795, "size": "sm", "text": "Özet: ışık enerjisiyle su ve karbondioksitten şeker yapılır; oksijen açığa çıkar." }
       ]
     }
   ]

@@ -63,7 +63,7 @@
       "title": "Kapakçıklar ve özet",
       "narration": "Dört kapak kanın geri kaçmasını önler. İki kulakçık birlikte, ardından iki karıncık birlikte kasılır; yani iki pompa aynı anda çalışır ve her atımda yaklaşık aynı miktarda kan gönderir.",
       "elements": [
-        { "type": "text", "x": 60, "y": 795, "size": "sm", "color": "green", "text": "Kapakçıklar akışı tek yönlü tutar. İki taraf aynı anda kasılır." }
+        { "type": "text", "x": 60, "y": 795, "size": "sm", "color": "green", "text": "Kapakçıklar akışı tek yönlü tutar. Önce iki kulakçık, sonra iki karıncık kasılır." }
       ]
     }
   ]
